@@ -1,22 +1,27 @@
 Rails.application.routes.draw do
 
-
-
   authenticated :user do                   
-    get '/', to: 'expenses#index', as: 'dashboard'
-    get '/expenses/daily', to: 'expenses#daily'
-    get '/expenses/net', to: 'expenses#net'
+    get '/expenses', to: 'expenses#index', as: 'expense'
+    
+    # statistics
+    get '/stats/category', to: 'stats#category'
+    get '/stats/daily', to: 'stats#daily'
+    get '/stats/monthly', to: 'stats#monthly'
+    get '/stats/net', to: 'stats#net'
+
+    # csv import
     get '/import', to: 'import#new', as: 'import'
     post '/import', to: 'import#csv', as: 'import_csv'
   end 
 
   root 'home#index'
 
+  get '/user', to: 'home#check', as: 'check'
   get '/about', to: 'home#about', as: 'about'
   get '/contact', to: 'home#contact', as: 'contact'
   get '/donation', to: 'home#donation', as: 'donation'
   
-  devise_for :users
+  devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}  
   resources :expenses
 end
 

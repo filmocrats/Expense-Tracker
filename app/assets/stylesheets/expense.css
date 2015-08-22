@@ -2,8 +2,13 @@ tr:hover td {
   background-color:#ADD8E6
 }
 
-#chart svg {
+#main-chart svg {
   height: 400px;
+}
+
+.chart svg {
+  margin: 0 auto;
+  height: 500px;
 }
 
 #infinite-scrolling  {
